@@ -10,14 +10,14 @@ function App() {
 
   const search = (evt) => {
     if (evt.key === "Enter") {
+      //console.log("working...");
       fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
         .then((res) => res.json())
         .then((result) => {
           setWeather(result);
+          console.log(result);
         });
       setQuery("");
-      // eslint-disable-next-line no-undef
-      console.log(result);
     }
   };
 
