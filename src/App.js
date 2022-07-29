@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 const api = {
-  key: "a2d3cc406eef814c9d3e63ae1b50e80f",
-  base: "https://openweathermap.org/data/3.0/",
+  key: "ce634fcae825c147ef1f1139ccfb966f",
+  base: "https://api.openweathermap.org/data/2.5/",
 };
 
 function App() {
@@ -10,14 +10,13 @@ function App() {
 
   const search = (evt) => {
     if (evt.key === "Enter") {
-      //console.log("working...");
       fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
         .then((res) => res.json())
         .then((result) => {
           setWeather(result);
+          setQuery("");
           console.log(result);
         });
-      setQuery("");
     }
   };
 
@@ -33,7 +32,7 @@ function App() {
       "August",
       "September",
       "October",
-      "Novemeber",
+      "November",
       "December",
     ];
     let days = [
@@ -53,6 +52,7 @@ function App() {
 
     return `${day} ${date} ${month} ${year}`;
   };
+
   return (
     <div
       className={
@@ -78,12 +78,12 @@ function App() {
           <div>
             <div className="location-box">
               <div className="location">
-                {weather.name}, {weather.sys.country.result}
+                {weather.name}, {weather.sys.country}
               </div>
               <div className="date">{dateBuilder(new Date())}</div>
             </div>
             <div className="weather-box">
-              <div className="temp">{Math.round(weather.main.temp)}˚c</div>
+              <div className="temp">{Math.round(weather.main.temp)}°c</div>
               <div className="weather">{weather.weather[0].main}</div>
             </div>
           </div>
